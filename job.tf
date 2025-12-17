@@ -21,7 +21,7 @@ resource "google_cloud_run_v2_job" "this" {
       max_retries           = 1
 
       vpc_access {
-        connector = local.vpc_access_connector
+        connector = local.vpc_access_connector_id
         egress    = "ALL_TRAFFIC"
       }
 

@@ -4,5 +4,5 @@ data "ns_connection" "network" {
 }
 
 locals {
-  vpc_access_connector = data.ns_connection.network.outputs.vpc_access_connector
+  vpc_access_connector_id = data.ns_connection.network.outputs.vpc_access_connector_id
 }
