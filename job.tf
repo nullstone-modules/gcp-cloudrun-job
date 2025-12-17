@@ -10,12 +10,12 @@ resource "google_cloud_run_v2_job" "this" {
   labels   = local.labels
 
   template {
-    task_count      = 1
-    parallelism     = var.parallelism
-    service_account = google_service_account.app.email
-    labels          = local.labels
+    task_count  = 1
+    parallelism = var.parallelism
+    labels      = local.labels
 
     template {
+      service_account       = google_service_account.app.email
       execution_environment = "EXECUTION_ENVIRONMENT_GEN2"
       timeout               = "${var.timeout_seconds}s"
       max_retries           = 1
