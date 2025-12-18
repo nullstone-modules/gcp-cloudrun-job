@@ -19,4 +19,7 @@ resource "google_secret_manager_secret_version" "app_secret" {
 
 locals {
   managed_secret_refs = { for key in local.secret_keys : key => google_secret_manager_secret.app_secret[key].name }
+
+  existing_secret_keys = keys(data.ns_env_variables.this.secret_refs)
+  all_secret_keys      = toset(concat(tolist(local.secret_keys), local.existing_secret_keys))
 }
