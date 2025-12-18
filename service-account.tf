@@ -4,7 +4,7 @@ resource "google_service_account" "app" {
 }
 
 // See https://cloud.google.com/kubernetes-engine/docs/tutorials/workload-identity-secrets
-resource "google_secret_manager_secret_iam_member" "k8s_access" {
+resource "google_secret_manager_secret_iam_member" "secrets_access" {
   for_each = local.secret_keys
 
   secret_id = google_secret_manager_secret.app_secret[each.key].secret_id
