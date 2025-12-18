@@ -1,5 +1,6 @@
 locals {
   job_name            = local.resource_name
+  effective_image_uri = local.app_version == "" ? dockerless_remote_image.bootstrap.target : "${local.repository_url}:${local.app_version}"
   main_container_name = "main"
   command             = length(var.command) > 0 ? var.command : null
 }
@@ -28,7 +29,7 @@ resource "google_cloud_run_v2_job" "this" {
 
       containers {
         name    = local.main_container_name
-        image   = "${local.repository_url}:${local.app_version}"
+        image   = local.effective_image_uri
         command = local.command
 
         resources {
