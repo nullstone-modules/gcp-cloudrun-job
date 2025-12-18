@@ -5,9 +5,10 @@ locals {
 }
 
 resource "google_cloud_run_v2_job" "this" {
-  name     = local.job_name
-  location = local.region
-  labels   = local.labels
+  name                = local.job_name
+  location            = local.region
+  labels              = local.labels
+  deletion_protection = false
 
   template {
     task_count  = 1
