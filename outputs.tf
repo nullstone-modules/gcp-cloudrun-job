@@ -36,10 +36,10 @@ output "job_name" {
 output "image_pusher" {
   value = {
     email       = try(google_service_account.image_pusher.email, "")
-    private_key = try(google_service_account_key.image_pusher.private_key, "")
+    impersonate = true
   }
 
-  description = "object({ email: string, private_key: string }) ||| A GCP service account that is allowed to push images."
+  description = "object({ email: string, impersonate: bool }) ||| A GCP service account that is allowed to push images."
 
   sensitive = true
 }
@@ -47,10 +47,10 @@ output "image_pusher" {
 output "deployer" {
   value = {
     email       = try(google_service_account.deployer.email, "")
-    private_key = try(google_service_account_key.deployer.private_key, "")
+    impersonate = true
   }
 
-  description = "object({ email: string, private_key: string }) ||| A GCP service account with explicit privilege to deploy this Cloud Run job."
+  description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to deploy this Cloud Run job."
   sensitive   = true
 }
 

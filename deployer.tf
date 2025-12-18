@@ -8,6 +8,27 @@ resource "google_service_account" "deployer" {
   display_name = "Deployer for ${local.block_name}"
 }
 
-resource "google_service_account_key" "deployer" {
-  service_account_id = google_service_account.deployer.account_id
+resource "google_project_iam_member" "deployer_update_access" {
+  project = local.project_id
+  role    = "roles/run.developer"
+  member  = "serviceAccount:${google_service_account.deployer.email}"
+}
+
+resource "google_project_iam_member" "deployer_invoker_access" {
+  project = local.project_id
+  role    = "roles/run.invoker"
+  member  = "serviceAccount:${google_service_account.deployer.email}"
+}
+
+resource "google_service_account_iam_member" "deployer_act_as_runtime" {
+  service_account_id = google_service_account.app.id
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.deployer.email}"
+}
+
+// Allow Nullstone Agent to impersonate the deployer account
+resource "google_service_account_iam_binding" "deployer_nullstone_agent" {
+  service_account_id = google_service_account.deployer.id
+  role               = "roles/iam.serviceAccountTokenCreator"
+  members            = ["serviceAccount:${local.ns_agent_service_account_email}"]
 }
