@@ -8,11 +8,19 @@ resource "google_service_account" "image_pusher" {
   display_name = "Image Pusher for ${local.app_name}"
 }
 
-resource "google_artifact_registry_repository_iam_member" "member" {
+resource "google_artifact_registry_repository_iam_member" "image_pusher_writer" {
   project    = google_artifact_registry_repository.this.project
   location   = google_artifact_registry_repository.this.location
   repository = google_artifact_registry_repository.this.name
   role       = "roles/artifactregistry.writer"
+  member     = "serviceAccount:${google_service_account.image_pusher.email}"
+}
+
+resource "google_artifact_registry_repository_iam_member" "image_pusher_reader" {
+  project    = google_artifact_registry_repository.this.project
+  location   = google_artifact_registry_repository.this.location
+  repository = google_artifact_registry_repository.this.name
+  role       = "roles/artifactregistry.reader"
   member     = "serviceAccount:${google_service_account.image_pusher.email}"
 }
 

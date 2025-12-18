@@ -3,9 +3,6 @@ terraform {
     ns = {
       source = "nullstone-io/ns"
     }
-    dockerless = {
-      source = "nullstone-io/dockerless"
-    }
   }
 }
 
