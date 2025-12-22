@@ -7,7 +7,7 @@ resource "google_service_account" "app" {
 resource "google_secret_manager_secret_iam_member" "secrets_access" {
   for_each = local.all_secret_keys
 
-  secret_id = local.all_secret_refs[each.key]
+  secret_id = local.all_secrets[each.value]
   project   = local.project_id
   role      = "roles/secretmanager.secretAccessor"
   member    = "serviceAccount:${google_service_account.app.email}"

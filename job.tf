@@ -52,7 +52,7 @@ resource "google_cloud_run_v2_job" "this" {
 
         # Secret environment variables
         dynamic "env" {
-          for_each = local.all_secret_refs
+          for_each = local.all_secrets
 
           content {
             name = env.key
