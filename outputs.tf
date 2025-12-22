@@ -40,8 +40,6 @@ output "image_pusher" {
   }
 
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account that is allowed to push images."
-
-  sensitive = true
 }
 
 output "deployer" {
@@ -51,7 +49,6 @@ output "deployer" {
   }
 
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to deploy this Cloud Run job."
-  sensitive   = true
 }
 
 output "main_container_name" {
