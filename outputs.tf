@@ -13,6 +13,16 @@ output "log_provider" {
   description = "string ||| The log provider used for this service."
 }
 
+output "log_reader" {
+  value = {
+    project_id  = local.project_id
+    email       = try(google_service_account.log_reader.email, "")
+    impersonate = true
+  }
+
+  description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to stream logs from this Cloud Run Job."
+}
+
 output "log_filter" {
   value       = "resource.type=\"cloud_run_job\" AND resource.labels.service_name=\"${local.job_name}\""
   description = "string ||| A log filter used by "
