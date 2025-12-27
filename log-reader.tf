@@ -18,5 +18,5 @@ resource "google_project_iam_member" "log_reader_logs_access" {
 resource "google_service_account_iam_binding" "log_reader_nullstone_agent" {
   service_account_id = google_service_account.log_reader.id
   role               = "roles/iam.serviceAccountTokenCreator"
-  members           = ["serviceAccount:${local.ns_agent_service_account_email}"]
+  members            = ["serviceAccount:${local.ns_agent_service_account_email}"]
 }
