@@ -69,7 +69,10 @@ resource "google_cloud_run_v2_job" "this" {
     }
   }
 
-  depends_on = [google_secret_manager_secret_iam_member.secrets_access]
+  depends_on = [
+    google_secret_manager_secret_iam_member.secrets_access,
+    google_secret_manager_secret_version.app_secret,
+  ]
 
   lifecycle {
     create_before_destroy = true
