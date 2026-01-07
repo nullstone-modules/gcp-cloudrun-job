@@ -8,6 +8,11 @@ output "project_id" {
   description = "string ||| The GCP Project ID hosting this Cloud Run Job"
 }
 
+output "region" {
+  value       = local.region
+  description = "string ||| The GCP region where this Cloud Run Job is hosted"
+}
+
 output "log_provider" {
   value       = "cloudlogging"
   description = "string ||| The log provider used for this service."
