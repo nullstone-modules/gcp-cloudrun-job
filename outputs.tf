@@ -29,7 +29,7 @@ output "log_reader" {
 }
 
 output "log_filter" {
-  value       = "resource.type=\"cloud_run_job\" AND resource.labels.service_name=\"${local.job_name}\""
+  value       = "resource.type=\"cloud_run_job\" AND resource.labels.job_name=\"${local.job_name}\""
   description = "string ||| A log filter used by "
 }
 
