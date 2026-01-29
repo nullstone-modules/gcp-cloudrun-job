@@ -33,6 +33,26 @@ output "log_filter" {
   description = "string ||| A log filter used by "
 }
 
+output "metrics_provider" {
+  value       = "cloudmonitoring"
+  description = "string ||| "
+}
+
+output "metrics_reader" {
+  value = {
+    project_id  = local.project_id
+    email       = try(google_service_account.deployer.email, "")
+    impersonate = true
+  }
+
+  description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to view metrics for this application."
+}
+
+output "metrics_mappings" {
+  value       = local.metrics_mappings
+  description = "string ||| A mapping of metric definitions used to render app metrics in the Nullstone UI."
+}
+
 output "service_name" {
   value       = "" // Always blank because we don't create a Service for jobs
   description = "string ||| This is blank because we don't have a Service for jobs."
