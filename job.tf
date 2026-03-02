@@ -25,7 +25,7 @@ resource "google_cloud_run_v2_job" "this" {
 
       vpc_access {
         connector = local.vpc_access_connector_id
-        egress    = "ALL_TRAFFIC"
+        egress    = "PRIVATE_RANGES_ONLY"
       }
 
       containers {
