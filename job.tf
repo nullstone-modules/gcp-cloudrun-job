@@ -1,7 +1,7 @@
 locals {
   job_name            = local.resource_name
   bootstrap_image_uri = "nullstone/cloudrun-bootstrap:latest"
-  effective_image_uri = local.app_version == "" ? local.bootstrap_image_uri : "${local.repository_url}:${local.app_version}"
+  effective_image_uri = local.app_version == "" ? local.bootstrap_image_uri : "${module.scaffold.repository_url}:${local.app_version}"
   main_container_name = "main"
   command             = length(var.command) > 0 ? var.command : null
 }
@@ -18,7 +18,7 @@ resource "google_cloud_run_v2_job" "this" {
     labels      = local.labels
 
     template {
-      service_account       = google_service_account.app.email
+      service_account       = module.scaffold.app_service_account.email
       execution_environment = "EXECUTION_ENVIRONMENT_GEN2"
       timeout               = "${var.timeout_seconds}s"
       max_retries           = 1

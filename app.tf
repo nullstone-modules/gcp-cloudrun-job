@@ -12,8 +12,8 @@ locals {
 locals {
   app_metadata = tomap({
     // Inject app metadata into capabilities here (e.g. service_account_id)
-    service_account_id    = google_service_account.app.id
-    service_account_email = google_service_account.app.email
+    service_account_id    = module.scaffold.app_service_account.id
+    service_account_email = module.scaffold.app_service_account.email
     job_name              = local.job_name
     job_id                = "projects/${local.project_id}/locations/${local.region}/jobs/${local.job_name}"
   })

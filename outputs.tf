@@ -1,5 +1,5 @@
 output "image_repo_url" {
-  value       = local.repository_url
+  value       = module.scaffold.repository_url
   description = "string ||| Service container image url."
 }
 
@@ -19,12 +19,7 @@ output "log_provider" {
 }
 
 output "log_reader" {
-  value = {
-    project_id  = local.project_id
-    email       = try(google_service_account.log_reader.email, "")
-    impersonate = true
-  }
-
+  value       = module.scaffold.log_reader
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to stream logs from this Cloud Run Job."
 }
 
@@ -39,12 +34,7 @@ output "metrics_provider" {
 }
 
 output "metrics_reader" {
-  value = {
-    project_id  = local.project_id
-    email       = try(google_service_account.deployer.email, "")
-    impersonate = true
-  }
-
+  value       = module.scaffold.metrics_reader
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to view metrics for this application."
 }
 
@@ -69,22 +59,12 @@ output "job_name" {
 }
 
 output "image_pusher" {
-  value = {
-    project_id  = local.project_id
-    email       = try(google_service_account.image_pusher.email, "")
-    impersonate = true
-  }
-
+  value       = module.scaffold.image_pusher
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account that is allowed to push images."
 }
 
 output "deployer" {
-  value = {
-    project_id  = local.project_id
-    email       = try(google_service_account.deployer.email, "")
-    impersonate = true
-  }
-
+  value       = module.scaffold.deployer
   description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to deploy this Cloud Run job."
 }
 
