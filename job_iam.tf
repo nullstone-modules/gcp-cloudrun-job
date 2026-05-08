@@ -1,6 +1,6 @@
 locals {
   cap_iam_members = {
-    for item in local.capabilities.job_iam_members : "${local.cap_env_prefixes[item.cap_tf_id]}${item.name}" => item.value
+    for item in local.capabilities.job_iam_members : "${local.cap_env_prefixes[item.cap_tf_id]}${item.name}" => item
   }
 }
 
