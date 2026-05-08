@@ -73,5 +73,17 @@ locals {
         mappings = jsonencode({})
       }
     ]
+
+    // job_iam_members allows capabilities to grant IAM roles on the Cloud Run Job
+    // The parent module creates the IAM bindings after the job exists, so the
+    // capability module does not need a graph dependency on the job resource.
+    job_iam_members = [
+      {
+        cap_tf_id = "x"
+        name      = ""
+        role      = ""
+        member    = ""
+      }
+    ]
   }
 }
