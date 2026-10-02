@@ -42,7 +42,7 @@ resource "google_cloud_run_v2_job" "this" {
 
         # Environment variables
         dynamic "env" {
-          for_each = local.all_env_vars
+          for_each = local.container_env_vars
 
           content {
             name  = env.key
